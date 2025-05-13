@@ -7,6 +7,26 @@ This project demonstrates deploying a multi-tier web application using Docker Co
 - Backend: Flask
 - Database: PostgreSQL
 
+## Here's a Sample Application Repository Layout using React (frontend) and Flask (backend API) with PostgreSQL as the database.
+
+📁 Sample Repository Layout
+multi-tier-app/
+├── frontend/
+│   ├── Dockerfile
+│   ├── public/
+│   └── src/
+│       ├── App.js
+│       └── index.js
+├── backend/
+│   ├── Dockerfile
+│   ├── app.py
+│   ├── requirements.txt
+│   └── config.py
+├── .env
+├── docker-compose.yml
+└── README.md
+
+
 ## Steps to Run
 
 ```bash
