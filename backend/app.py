@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 import os
 import psycopg2
 
@@ -11,6 +11,10 @@ def home():
 @app.route("/health")
 def health():
     return "OK"
+
+@app.route('/api/message')
+def get_message():
+    return jsonify(message="Hello from backend!")
 
 @app.route("/db-test")
 def db_test():
