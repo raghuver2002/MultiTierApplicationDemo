@@ -1,18 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function App() {
-  const [message, setMessage] = useState("");
+  const [backendMessage, setBackendMessage] = useState('');
 
   useEffect(() => {
-    fetch("http://<PUBLIC-IP>:5000/")
-      .then((res) => res.text())
-      .then((data) => setMessage(data));
+    axios.get('/api/message')
+      .then((response) => {
+        setData(response.data);
+        setLoading(false);
+        console.log('API Response:', response.data);
+        setBackendMessage(response.data.message);
+      })
+      .catch(error => {
+        setData(err.message);
+        setLoading(false);
+        console.error('Error fetching message:', error);
+      });
   }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <div>
-      <h1>Frontend Connected to Backend</h1>
-      <p>Backend says: {message}</p>
+      <p>Frontend Connected to Backend</p>
+      <p>Backend says: {backendMessage}</p>
     </div>
   );
 }
