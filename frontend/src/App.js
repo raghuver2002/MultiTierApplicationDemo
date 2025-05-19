@@ -3,24 +3,24 @@ import axios from 'axios';
 
 function App() {
   const [backendMessage, setBackendMessage] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get('/api/message')
-      .then((response) => {
-        setData(response.data);
-        setLoading(false);
-        console.log('API Response:', response.data);
+    axios.get('http://localhost:5000/api/message')
+      .then(response => {
         setBackendMessage(response.data.message);
+        setLoading(false);
       })
       .catch(error => {
-        setData(err.message);
-        setLoading(false);
         console.error('Error fetching message:', error);
+        setError('Failed to fetch message');
+        setLoading(false);
       });
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div>
